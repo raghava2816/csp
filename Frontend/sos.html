@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SOS - Voice of Her</title>
+  <link rel="stylesheet" href="sos.css" />
+</head>
+<body>
+
+  <h1>Emergency SOS</h1>
+  <div id="root"></div>
+
+  <button id="sosBtn">Send Emergency SOS</button>
+  <p id="status"></p>
+
+  <script>
+    async function sendSOS() {
+      const userId = prompt("Enter your Aadhar Number");
+
+      if (!userId || !navigator.geolocation) {
+        alert("Missing Aadhar or location not supported");
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(async (pos) => {
+        const lat = pos.coords.latitude;
+        const lon = pos.coords.longitude;
+        const message = `🚨 Emergency! Location: https://maps.google.com/?q=${lat},${lon}`;
+
+        try {
+          const res = await fetch("http://localhost:3000/send-sos", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ userId, message })
+          });
+
+          const data = await res.json();
+          if (res.ok) {
+            alert(`✅ SOS sent to ${data.count} users`);
+          } else {
+            alert("❌ Error: " + data.error);
+          }
+        } catch (err) {
+          alert("❌ Network/server error");
+          console.error(err);
+        }
+      });
+    }
+
+    document.getElementById("sosBtn").addEventListener("click", sendSOS);
+  </script>
+
+</body>
+</html>
+

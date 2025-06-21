@@ -1,0 +1,49 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5; /* Changed to match style.css */
+  color: #333; /* Changed to match style.css */
+  text-align: center;
+  padding: 40px;
+}
+
+#root {
+  margin-bottom: 30px;
+}
+
+.phone-number {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333; /* Changed to match style.css */
+  padding: 15px;
+  margin: 10px auto;
+  width: 250px;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.phone-number:hover {
+  transform: scale(1.05);
+}
+
+#sosBtn {
+  padding: 15px 30px;
+  font-size: 18px;
+  background-color: #e75480; /* Changed to match style.css */
+  color: #fff; /* Changed to match style.css */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: 0.3s;
+}
+
+#sosBtn:hover {
+  background-color: #c13c6f; /* Changed to match style.css */
+}
+
+#status {
+  margin-top: 20px;
+  font-size: 16px;
+}

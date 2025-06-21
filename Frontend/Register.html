@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register</title>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #111;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 12px;
+      width: 400px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 15px 0;
+      border-radius: 6px;
+      border: none;
+    }
+
+    button {
+      padding: 10px;
+      background: #fff;
+      color: #333;
+      border: none;
+      border-radius: 6px;
+      width: 100%;
+      cursor: pointer;
+    }
+  </style>
+
+  <script type="module" src="fire.js"></script>
+  <script type="module">
+    import { addUser } from "./fire.js";
+
+    function validateForm(event) {
+      event.preventDefault();
+
+      const aadhar = document.getElementById("aadhar").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const password = document.getElementById("password").value.trim();
+      let errorMsg = "";
+
+      if (!aadhar) errorMsg += "Aadhar is required.\\n";
+      if (!phone) errorMsg += "Phone is required.\\n";
+      if (!password || password.length < 6) errorMsg += "Password must be at least 6 characters.\\n";
+
+      if (errorMsg) {
+        alert(errorMsg);
+      } else {
+        addUser(aadhar, password, phone);
+        alert("✅ Registered Successfully!");
+        document.getElementById("register-form").reset();
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("register-btn").addEventListener("click", validateForm);
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h2>Register</h2>
+    <form id="register-form">
+      <input type="text" id="aadhar" placeholder="Aadhar Number" required />
+      <input type="text" id="phone" placeholder="Phone Number" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit" id="register-btn">Register</button>
+    </form>
+  </div>
+</body>
+</html>
