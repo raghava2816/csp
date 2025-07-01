@@ -205,8 +205,10 @@
         const address = document.getElementById("address").value.trim();
         const password = document.getElementById("password").value.trim();
         if (address && password) {
+          // Store user info in localStorage
+          localStorage.setItem("userId", address);
           alert("Login successful!");
-          window.location.href = "index.html"; // Redirect to index.html after login
+          window.location.href = "index (1).html"; // Updated index page name
         } else {
           alert("Please enter both Aadhar and Password.");
         }

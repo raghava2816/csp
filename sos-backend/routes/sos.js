@@ -6,18 +6,19 @@ const User = require("../models/User");
 const API_KEY = process.env.FAST2SMS_API_KEY;
 
 router.post("/", async (req, res) => {
-  const { userId, message } = req.body;
-  if (!userId || !message)
-    return res.status(400).json({ error: "Missing data" });
+  const { message } = req.body;
+  if (!message)
+    return res.status(400).json({ error: "Missing message" });
 
   try {
-    const users = await User.find({ userId: { $ne: userId } });
+    // Send to all users
+    const users = await User.find({});
     const numbers = users.map(u => u.phone).join(",");
 
     const payload = {
       message: message,
       language: "english",
-      route: "q", // ✅ Updated route
+      route: "q",
       numbers: numbers
     };
 

@@ -16,23 +16,21 @@
 
   <script>
     async function sendSOS() {
-      const userId = prompt("Enter your Aadhar Number");
-
-      if (!userId || !navigator.geolocation) {
-        alert("Missing Aadhar or location not supported");
+      if (!navigator.geolocation) {
+        alert("Location not supported");
         return;
       }
 
       navigator.geolocation.getCurrentPosition(async (pos) => {
         const lat = pos.coords.latitude;
         const lon = pos.coords.longitude;
-        const message = `🚨 Emergency! Location: https://maps.google.com/?q=${lat},${lon}`;
+        const message = `🚨 Emergency! The user in the given location is in danger⚠️! Location: https://maps.google.com/?q=${lat},${lon}`;
 
         try {
           const res = await fetch("http://localhost:3000/send-sos", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ userId, message })
+            body: JSON.stringify({ message })
           });
 
           const data = await res.json();

@@ -18,6 +18,9 @@ export async function addUser(aadhar, password, phone) {
 
     if (res.ok) {
       alert("✅ Registered successfully!");
+      // Store user info in localStorage
+      // Redirect to index page
+      window.location.href = "index (1).html";
     } else {
       alert("❌ Error: " + data.error);
     }
